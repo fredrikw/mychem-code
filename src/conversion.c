@@ -1225,15 +1225,19 @@ char *inchi_to_molecule(UDF_INIT *initid, UDF_ARGS *args, char *result, unsigned
 
 my_bool molecule_to_inchi_init(UDF_INIT *initid, UDF_ARGS *args, char *message)
 {
-  if (args->arg_count != 1) {
+  if ((args->arg_count < 1) || (args->arg_count > 2)) {
     strcpy(message, "Wrong number of arguments: MOLECULE_TO_INCHI() requires one argument");
     return 1;
   }
   if (args->arg_type[0] != STRING_RESULT) {
-    strcpy(message,"Wrong argument type: MOLECULE_TO_INCHI() requires a STRING");
+    strcpy(message,"Wrong argument type: MOLECULE_TO_INCHI() requires a STRING as first argument");
     return 1;
   }
-
+  if ((args->arg_count == 2) && (args->arg_type[1] != INT_RESULT)) {
+    strcpy(message,"Wrong argument type: MOLECULE_TO_INCHI() requires an INT as second argument (flag to return InChIKey)");
+    return 1;
+  }
+  
   initid->maybe_null = 1;
   initid->max_length = MAX_VALUE_LENGTH;
 
@@ -1278,7 +1282,11 @@ char *molecule_to_inchi(UDF_INIT *initid, UDF_ARGS *args, char *result, unsigned
   *is_null = 0;
   *error = 0;
 
-  outputMol = conversion(inputMol, inputFormat, outputFormat);
+  if ((args->arg_count == 2) && (*args->args[1] == 1)) {
+    outputMol = conversion(inputMol, inputFormat, "INCHIKEY");
+  } else {
+    outputMol = conversion(inputMol, inputFormat, outputFormat);
+  }
 
   /* Return NULL if the outputMol is empty */
   if (outputMol == NULL) {
