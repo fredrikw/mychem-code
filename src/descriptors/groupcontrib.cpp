@@ -28,6 +28,7 @@ GNU General Public License for more details.
 #include <openbabel/parsmart.h>
 #include <openbabel/groupcontrib.h>
 #include <openbabel/locale.h>
+#include <openbabel/elements.h>
 
 using namespace std;
 
@@ -158,7 +159,7 @@ namespace OpenBabel
     double total = 0.0;
 
     for (int index = 0; index < tmpmol.NumAtoms(); index++) {
-      if (tmpmol.GetAtom(index+1)->IsHydrogen())
+      if (tmpmol.GetAtom(index+1)->GetAtomicNum() == OBElements::Hydrogen)
         continue;
 
       total += atomValues[index];
