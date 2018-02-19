@@ -32,9 +32,9 @@
 #include <cstdio>
 
 #ifdef __APPLE__
-#define OBLIBRARY "libopenbabel.4.dylib"
+#define OBLIBRARY "libopenbabel.dylib"
 #else
-#define OBLIBRARY "libopenbabel.so.4"
+#define OBLIBRARY "libopenbabel.so"
 #endif
 
 using namespace std;
