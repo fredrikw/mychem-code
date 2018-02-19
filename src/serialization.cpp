@@ -284,7 +284,6 @@ bool unserializeOBMol(OBBase* pOb, const char *serializedInput, bool stereoEnabl
   }
  
   mol.SetAromaticPerceived();
-  mol.SetKekulePerceived();
 
   return true;
 }
