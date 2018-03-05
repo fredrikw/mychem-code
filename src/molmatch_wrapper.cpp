@@ -71,8 +71,8 @@ long long match_substructure(const char *smarts_pattern, const char *serializedM
 /*  if (!sp.Init(smarts_pattern)) { return -1;}
   }
 */
-  if (mol.NumHvyAtoms() < sp.NumAtoms()) {
-    /* More heavy atoms in pattern than in serializedMolecule */
+  if (mol.NumAtoms() < sp.NumAtoms()) {
+    /* More atoms in pattern than in serializedMolecule */
     return 0;
   }
 
@@ -117,8 +117,8 @@ char *substructure_atom_ids(const char *smarts_pattern, const char *serializedMo
 
   sp.Init(smarts_pattern);
 
-  if (mol.NumHvyAtoms() < sp.NumAtoms()) {
-    /* More heavy atoms in pattern than in serializedMolecule */
+  if (mol.NumAtoms() < sp.NumAtoms()) {
+    /* More atoms in pattern than in serializedMolecule */
     retVal = strdup(outstream.str().c_str());
     return retVal;
   }
