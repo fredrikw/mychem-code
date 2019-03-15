@@ -46,7 +46,7 @@ typedef long long longlong;
 #include <my_sys.h>
 #endif /* STANDARD */
 #include <mysql.h>
-#include <m_ctype.h>
+#include <mariadb_ctype.h>
 #include <m_string.h>		/* To get strmov() */
 
 #ifdef HAVE_DLOPEN
